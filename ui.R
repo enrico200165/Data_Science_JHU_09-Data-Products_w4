@@ -5,6 +5,8 @@
 # http://shiny.rstudio.com
 #
 
+source("backend.R")
+
 library(shiny)
 
 shinyUI(fluidPage(
@@ -15,16 +17,24 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
-    ),
 
+    sliderInput("bins",
+        "Number of bins:",
+        min = 1,
+        max = 50,
+        value = 30)
+
+    ,selectInput("utlCmdId", "Choose a command:",
+        list('explore' = c("str", "names", "nrow"),
+        'Summaries' = c("summary", "mean", "median")
+      ))
+    ) # sidebar panel
     # Show a plot of the generated distribution
-    mainPanel(
+  ,mainPanel(
       plotOutput("distPlot")
-    )
+      ,textOutput("utlCmdOut")
+      ,textOutput("utlCmdChosen")
+      ,textOutput("traceOut")
+  )
   )
 ))

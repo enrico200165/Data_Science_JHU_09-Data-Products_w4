@@ -1,11 +1,17 @@
 
+library(shiny)
 
 curdf <- data.frame(x=1:10)
+traceIt <- "pippo"
+traceText <- reactive({traceIt})
+values <- "dummy"
 
-
-init <- function() {
+initBE <- function() {
   data("mtcars")
-  curdf <- mtcars
+  values <<- reactiveValues()
+  values$msg <<- "reactive value message"
+  
+  curdf <<- mtcars
 }
 
 utlCmd <- function(cmdPar) {
@@ -13,4 +19,12 @@ utlCmd <- function(cmdPar) {
 }
 
 
-init()
+# getMsg <- function() {
+#   return(traceText());
+# }
+
+setMsg <- function(m) { 
+  values$msg <<- m; 
+}
+  
+# initBE()
