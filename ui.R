@@ -31,7 +31,7 @@ shinyUI(fluidPage(
     ) # sidebar panel
     # Show a plot of the generated distribution
   ,mainPanel(
-      plotOutput("distPlot")
+       plotOutput("regrPlot")
       ,textOutput("utlCmdOut")
       ,textOutput("utlCmdChosen")
       ,textOutput("traceOut")

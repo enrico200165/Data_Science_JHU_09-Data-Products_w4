@@ -1,4 +1,5 @@
 
+library(ggplot2)
 library(shiny)
 
 curdf <- data.frame(x=1:10)
@@ -27,4 +28,14 @@ setMsg <- function(m) {
   values$msg <<- m; 
 }
   
-# initBE()
+plotRegression <- function(xpar, ypar,dfra) {
+  # hist(sample(100:110,100, replace = T),col = 'darkgray', border = 'white')
+  p <- ggplot(data = dfra, aes(x=xpar,y=ypar))
+  p <- p + geom_point(size=4)
+  p
+}
+
+fitModel <- function(resp_v, regr_v,dfra) {
+  fit <- lm(response ~ regressor)
+}
+
