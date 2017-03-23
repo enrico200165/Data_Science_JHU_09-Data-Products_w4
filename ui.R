@@ -12,33 +12,36 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("mtcars lm GUI"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
 
-    sliderInput("bins",
-        "Number of bins:",
-        min = 1,
-        max = 50,
-        value = 30)
-
-    ,selectInput("yVar", "Choose Response Variable:",
+    selectInput("yVar", "Choose Response Variable:",
       names(mtcars), selected = 1
     )
     
     ,selectInput("xVar", "Choose predictor Variable:",
         names(mtcars)
-      ,selected = names(mtcars)[2]
+      ,selected = names(mtcars)[length(names(mtcars))]
     )
     
-        
-        
+    ,radioButtons("regrLine", "Regression Smoothing",
+                  plotParamConsts$regrPlotSmooth
+    )
+    ,    sliderInput("pointSize",
+                     "Size of points in plot:",
+                     min = 1,
+                     max = 8,
+                     value = 2)
+    
+    ,hr()
     ,selectInput("utlCmdId", "Choose a command:",
-        list('explore' = c("str", "names", "nrow"),
-        'Summaries' = c("summary", "mean", "median")
-      ))
+                 utlCmdMenu
+        # list('explore' = c("str", "names", "nrow"),
+        # 'Summaries' = c("summary", "mean", "median")
+      )
     ) # sidebar panel
     # Show a plot of the generated distribution
   ,mainPanel(

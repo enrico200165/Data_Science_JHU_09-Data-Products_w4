@@ -16,35 +16,42 @@ setMsg("BE init complete")
 
 shinyServer(function(input, output) {
 
-
-  output$utlCmdOut <- renderText({
-    utlCmd("dummyInput")})
-  
-  
   output$globalStatus <- renderText({
-    status <- paste(
-      "y var:",input$yVar
-      ,"x var:",input$xVar
+    status <- paste("Status info: "
+      ,"y var:",input$yVar
+      ," ","x var:",input$xVar
     ,sep="");
     return(status)
   })
   
   
-  # trace msg 
+  # Utility command 
   output$utlCmdChosen <- renderText({
-    chosen <- input$utlCmdId;
-    values$msg <<- paste("latest msg = ",chosen);
-    return(chosen)
+
+    ret <- paste("performing command:",input$utlCmdId)
+
+        if (input$utlCmdId %in% unlist(utlCmdMenu['On Data Frame'])) {
+      cmd_out <- performDFCommand(input$utlCmdId,input$xVar)
+    } else if(input$utlCmdId %in% unlist(utlCmdMenu['On "x" variable'])) {
+      ret <- paste(ret,"on variable:",input$xVar)
+      cmd_out <- performVariableCommand(input$utlCmdId,input$xVar)
+    } else {
+      cmd_out <- "unable to perform command"    
+    }
+    cmd_out <- paste(cmd_out,sep = " ", collapse = " ")
+    ret <- paste(ret,"raw output: ",cmd_out, sep = " ", collapse = " ")
+      return(ret)
     })
 
-  
-  
-    
-  
-  
+
   output$regrPlot <- renderPlot({
-    plotRegression(input$xVar,input$yVar,mtcars);
+    plotPars@regrSmoot <- input$regrLine
+    plotPars@pointSize <- input$pointSize
+    plotRegression(input$xVar,input$yVar,mtcars,
+                   plotPars);
   })
-   # "trace" msgs
+
+  
+     # "trace" msgs
    output$traceOut <- renderText({values$msg})
 })
