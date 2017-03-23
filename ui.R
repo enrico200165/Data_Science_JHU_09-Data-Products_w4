@@ -12,23 +12,24 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("mtcars lm GUI"),
+  titlePanel("Simple Plot mtcars"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
 
-    selectInput("yVar", "Choose Response Variable:",
+    selectInput("yVar", "Choose Y Variable:",
       names(mtcars), selected = 1
     )
     
-    ,selectInput("xVar", "Choose predictor Variable:",
+    ,selectInput("xVar", "Choose X Variable:",
         names(mtcars)
       ,selected = names(mtcars)[length(names(mtcars))]
     )
     
     ,radioButtons("regrLine", "Regression Smoothing",
-                  plotParamConsts$regrPlotSmooth
+                  plotParamConsts$regrPlotSmooth,
+                  selected = "Loess"
     )
     ,    sliderInput("pointSize",
                      "Size of points in plot:",

@@ -28,21 +28,20 @@ shinyServer(function(input, output) {
   # Utility command 
   output$utlCmdChosen <- renderText({
 
-    ret <- paste("performing command:",input$utlCmdId)
+    ret <- paste("Performing Command: \"",input$utlCmdId,"\"",sep="")
 
         if (input$utlCmdId %in% unlist(utlCmdMenu['On Data Frame'])) {
       cmd_out <- performDFCommand(input$utlCmdId,input$xVar)
     } else if(input$utlCmdId %in% unlist(utlCmdMenu['On "x" variable'])) {
-      ret <- paste(ret,"on variable:",input$xVar)
+      ret <- paste(ret,"on Variable:\"",input$xVar,"\"",sep = "")
       cmd_out <- performVariableCommand(input$utlCmdId,input$xVar)
     } else {
-      cmd_out <- "unable to perform command"    
+      cmd_out <- "Unable To Perform Command"    
     }
     cmd_out <- paste(cmd_out,sep = " ", collapse = " ")
-    ret <- paste(ret,"raw output: ",cmd_out, sep = " ", collapse = " ")
+    ret <- paste(ret,"Raw Output: ",cmd_out, sep = " ", collapse = " ")
       return(ret)
     })
-
 
   output$regrPlot <- renderPlot({
     plotPars@regrSmoot <- input$regrLine
@@ -53,5 +52,7 @@ shinyServer(function(input, output) {
 
   
      # "trace" msgs
-   output$traceOut <- renderText({values$msg})
+   output$traceOut <- renderText({
+     paste("Internal/debug msg:",values$msg)
+     })
 })
