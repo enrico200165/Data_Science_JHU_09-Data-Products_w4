@@ -3,8 +3,6 @@ library(ggplot2)
 library(shiny)
 
 curdf <- data.frame(x=1:10)
-traceIt <- "pippo"
-traceText <- reactive({traceIt})
 values <- "dummy"
 
 
@@ -39,7 +37,7 @@ setMsg <- function(m) {
 plotRegression <- function(xpar, ypar,dfra,plotPar) {
   p <- ggplot(data = dfra, aes(x=dfra[[xpar]],y=dfra[[ypar]]))
   p <- p + geom_point(size=plotPar@pointSize)
-
+  p <- p + xlab(xpar) + ylab(ypar)
   if (plotPar@regrSmoot == "Lm")
       p <- p + geom_smooth(method='lm',formula=y~x)
   if (plotPar@regrSmoot == "Loess")
