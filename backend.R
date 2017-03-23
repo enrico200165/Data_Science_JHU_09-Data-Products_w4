@@ -30,8 +30,8 @@ setMsg <- function(m) {
   
 plotRegression <- function(xpar, ypar,dfra) {
   # hist(sample(100:110,100, replace = T),col = 'darkgray', border = 'white')
-  p <- ggplot(data = dfra, aes(x=xpar,y=ypar))
-  p <- p + geom_point(size=4)
+  p <- ggplot(data = dfra, aes(x=dfra[[xpar]],y=dfra[[ypar]]))
+  p <- p + geom_point(size=2)
   p
 }
 

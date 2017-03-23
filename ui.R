@@ -24,6 +24,17 @@ shinyUI(fluidPage(
         max = 50,
         value = 30)
 
+    ,selectInput("yVar", "Choose Response Variable:",
+      names(mtcars), selected = 1
+    )
+    
+    ,selectInput("xVar", "Choose predictor Variable:",
+        names(mtcars)
+      ,selected = names(mtcars)[2]
+    )
+    
+        
+        
     ,selectInput("utlCmdId", "Choose a command:",
         list('explore' = c("str", "names", "nrow"),
         'Summaries' = c("summary", "mean", "median")
@@ -34,6 +45,7 @@ shinyUI(fluidPage(
        plotOutput("regrPlot")
       ,textOutput("utlCmdOut")
       ,textOutput("utlCmdChosen")
+      ,textOutput("globalStatus")
       ,textOutput("traceOut")
   )
   )

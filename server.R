@@ -19,15 +19,31 @@ shinyServer(function(input, output) {
 
   output$utlCmdOut <- renderText({
     utlCmd("dummyInput")})
-   
+  
+  
+  output$globalStatus <- renderText({
+    status <- paste(
+      "y var:",input$yVar
+      ,"x var:",input$xVar
+    ,sep="");
+    return(status)
+  })
+  
+  
+  # trace msg 
   output$utlCmdChosen <- renderText({
     chosen <- input$utlCmdId;
-    values$msg <<- paste("values$msg = ",chosen);
+    values$msg <<- paste("latest msg = ",chosen);
     return(chosen)
     })
+
+  
+  
+    
+  
   
   output$regrPlot <- renderPlot({
-    plotRegression(mtcars$mpg, mtcars$cyl,mtcars);
+    plotRegression(input$xVar,input$yVar,mtcars);
   })
    # "trace" msgs
    output$traceOut <- renderText({values$msg})
