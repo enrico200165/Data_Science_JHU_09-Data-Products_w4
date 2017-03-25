@@ -28,7 +28,7 @@ shinyServer(function(input, output) {
   # Utility command 
   output$utlCmdChosen <- renderText({
 
-    ret <- paste("Performing Command: \"",input$utlCmdId,"\"",sep="")
+    ret <- paste("function: \"",input$utlCmdId,"\"",sep="")
 
         if (input$utlCmdId %in% unlist(utlCmdMenu['On Data Frame'])) {
       cmd_out <- performDFCommand(input$utlCmdId,input$xVar)
@@ -36,7 +36,7 @@ shinyServer(function(input, output) {
       ret <- paste(ret,"on Variable:\"",input$xVar,"\"",sep = "")
       cmd_out <- performVariableCommand(input$utlCmdId,input$xVar)
     } else {
-      cmd_out <- "Unable To Perform Command"    
+      cmd_out <- "unable To execute function"    
     }
     cmd_out <- paste(cmd_out,sep = " ", collapse = " ")
     ret <- paste(ret,"Raw Output: ",cmd_out, sep = " ", collapse = " ")

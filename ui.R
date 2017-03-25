@@ -12,7 +12,7 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Simple Plot mtcars"),
+  titlePanel("Stats and Plot on mtcars"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
@@ -31,25 +31,23 @@ shinyUI(fluidPage(
                   plotParamConsts$regrPlotSmooth,
                   selected = "Loess"
     )
-    ,    sliderInput("pointSize",
-                     "Size of points in plot:",
-                     min = 1,
-                     max = 8,
-                     value = 2)
+    ,sliderInput("pointSize",
+      "Size of points in plot:"
+      ,min = 1, max = 8,value = 2)
     
     ,hr()
-    ,selectInput("utlCmdId", "Choose a command:",
-                 utlCmdMenu
-        # list('explore' = c("str", "names", "nrow"),
-        # 'Summaries' = c("summary", "mean", "median")
-      )
+    ,selectInput("utlCmdId", "Choose a Statistic:",utlCmdMenu,
+                 selected = "median")
     ) # sidebar panel
     # Show a plot of the generated distribution
   ,mainPanel(
        plotOutput("regrPlot")
       ,textOutput("utlCmdOut")
+      ,hr()
       ,textOutput("utlCmdChosen")
+      ,hr()
       ,textOutput("globalStatus")
+      ,hr()
       ,textOutput("traceOut")
   )
   )

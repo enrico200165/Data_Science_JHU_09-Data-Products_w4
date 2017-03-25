@@ -49,15 +49,13 @@ plotRegression <- function(xpar, ypar,dfra,plotPar) {
 
 performVariableCommand <- function(cmdPar, var) {
   cmd <- match.fun(cmdPar)
-  setMsg(paste("running command:",cmdPar,"on",var))
-  #setMsg(paste("command",cmdPar," var ",var))  
+  setMsg(paste("function:",cmdPar,"on",var))
   return(cmd(mtcars[[var]]))
 }
 
 
 performDFCommand <- function(cmdPar, var) {
   cmd <- match.fun(cmdPar)
-  # ret <- paste("running command:",cmdPar,"on mtcars data frame")
   ret <- cmd(mtcars)
   ret
 }
