@@ -17,8 +17,7 @@ setMsg("BE init complete")
 shinyServer(function(input, output) {
 
   output$globalStatus <- renderText({
-    status <- paste("Status info: "
-      ,"y var:",input$yVar
+    status <- paste("y var:",input$yVar
       ," ","x var:",input$xVar
     ,sep="");
     return(status)
@@ -53,6 +52,6 @@ shinyServer(function(input, output) {
   
      # "trace" msgs
    output$traceOut <- renderText({
-     paste("Internal/debug msg:",values$msg)
+     paste(values$msg)
      })
 })

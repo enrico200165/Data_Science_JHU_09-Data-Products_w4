@@ -41,13 +41,20 @@ shinyUI(fluidPage(
     ) # sidebar panel
     # Show a plot of the generated distribution
   ,mainPanel(
-       plotOutput("regrPlot")
+       h3(strong("Documentation")
+          ,tags$a(href="https://enrico200165.shinyapps.io/appdocumentation/"
+            ,"here",style="color:blue;"),style="color:red"
+       )
+       ,hr()
+      ,plotOutput("regrPlot")
+      ,h3("Stat functions output",style="color:blue")
       ,textOutput("utlCmdOut")
-      ,hr()
       ,textOutput("utlCmdChosen")
       ,hr()
+      ,h3("AppStatus",style="color:blue")
       ,textOutput("globalStatus")
       ,hr()
+      ,h3("Debug messages",style="color:blue")
       ,textOutput("traceOut")
   )
   )
